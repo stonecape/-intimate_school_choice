@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+ 
+<classPathEntry
+		location="D:\mysql-connector-java-5.1.38-bin.jar" />
+
+  <context id="context1" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/memory_school?characterEncoding=utf-8" userId="root" password="1q2w3e4r" />
+    <javaModelGenerator targetPackage="com.bistu.intimate.dto" targetProject="intimate_school" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="intimate_school" />
+    <javaClientGenerator targetPackage="com.bistu.intimate.dao" targetProject="intimate_school" type="XMLMAPPER"/>
+	<table schema="intimate_school" tableName="major_detail" domainObjectName="MajorDetail"/>
+	<table schema="intimate_school" tableName="major_detail_passing_score" domainObjectName="MajorDetailPassingScore"/>
+	<table schema="intimate_school" tableName="major_info" domainObjectName="MajorInfo"/>
+	<table schema="intimate_school" tableName="school_info" domainObjectName="SchoolInfo"/>
+	<table schema="intimate_school" tableName="user" domainObjectName="User"/>
+	<table schema="intimate_school" tableName="user_collection" domainObjectName="UserCollection"/>
+	
+  </context>
+
+</generatorConfiguration>
