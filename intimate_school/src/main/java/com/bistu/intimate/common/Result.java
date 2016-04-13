@@ -2,9 +2,17 @@ package com.bistu.intimate.common;
 
 public class Result<T> implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * 处理成功标识
+	 */
 	private boolean success;
+	/** 
+	 * 返回码
+	 */
 	private String resultCode;
+	/**
+	 * 错误信息
+	 */
 	private String errorMsg;
 	private T value;
 

@@ -10,4 +10,11 @@ public interface UserService {
 	 * @return
 	 */
 	Result<User> addNewUser(User user);
+	
+	/**
+	 * 查询是否已经存在userName
+	 * @param userName
+	 * @return true:已经存在 false:不存在
+	 */
+	Result<Boolean> checkUserNameIsExist(String userName);
 }
