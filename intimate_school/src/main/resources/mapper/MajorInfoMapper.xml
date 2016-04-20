@@ -363,4 +363,15 @@
       major_direction = #{majorDirection,jdbcType=VARCHAR}
     where major_id = #{majorId,jdbcType=INTEGER}
   </update>
+  
+  
+  <!-- 以下新添 -->
+  
+  <select id="getDistinctMajorClass" resultType="String">
+  	select distinct(major_class) from major_info
+  </select>
+  
+  <select id="getDistinctMajorType" resultType="String">
+  	select distinct(major_type) from major_info
+  </select>
 </mapper>

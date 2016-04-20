@@ -11,7 +11,7 @@ public class BaseBean implements Serializable {
 	/**
 	 * 每页size
 	 */
-	private int pageSize;
+	private int pageSize = 5;
 	
 	public int getPageNo() {
 		if(pageNo <= 0) {

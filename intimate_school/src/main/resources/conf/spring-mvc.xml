@@ -29,4 +29,23 @@
    <!-- 对模型视图添加前后缀 -->
      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
       p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+      
+   <!-- 登录拦截器 -->
+  	 <mvc:interceptors>  
+      <mvc:interceptor>  
+        <mvc:mapping path="/*/*"/>  
+        <bean class="com.bistu.intimate.interceptor.LoginInterceptor">  
+          <property name="ignorePath">  
+            <list>  
+              <!-- 如果请求中包含以下路径，则不进行拦截 --> 
+              <value>/index</value>  
+              <value>/login</value>  
+              <value>/static</value> 
+              <value>/user</value>
+              <value>/ajaxUser</value> 
+            </list>  
+          </property>  
+        </bean>  
+      </mvc:interceptor>  
+    </mvc:interceptors>   
 </beans>

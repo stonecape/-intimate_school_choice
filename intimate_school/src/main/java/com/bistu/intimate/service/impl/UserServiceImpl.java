@@ -2,18 +2,21 @@ package com.bistu.intimate.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.bistu.intimate.common.Result;
 import com.bistu.intimate.dao.UserMapper;
 import com.bistu.intimate.dto.User;
 import com.bistu.intimate.dto.UserExample;
 import com.bistu.intimate.service.UserService;
+import com.bistu.intimate.util.SecurityUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -83,6 +86,61 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return result;
+	}
+
+	public Result<Boolean> identifyUser(String userName, String password) {
+		Result<Boolean> result = new Result<Boolean>();
+		logger.info("校验登录:userName->" + userName + ";password->" + password);
+		if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
+			result.setSuccess(false);
+			logger.error("用户名或密码为空");
+			return result;
+		}
+		
+		String cipherPassword = SecurityUtil.getMd5(password.trim());
+		logger.info("cipherPassword->" + cipherPassword);
+		
+		try {
+			UserExample ex = new UserExample();
+			ex.or().andUserNameEqualTo(userName.trim())
+			.andPasswordEqualTo(cipherPassword);
+			
+			List<User> list = userMapper.selectByExample(ex);
+			
+			result.setSuccess(true);
+			if(list != null && list.size() == 1) {
+				result.setValue(true);
+			} else {
+				result.setValue(false);
+			}
+			
+		} catch(Exception e) {
+			logger.error("校验用户名和密码发生异常", e);
+			result.setSuccess(false);
+		}
+		
+		return result;
+	}
+
+	public List<User> queryUser(Map<String, Object> queryMap) {
+		try {
+			UserExample ex = new UserExample();
+			if(!StringUtils.isEmpty((String)queryMap.get("userName"))) {
+				ex.or().andUserNameEqualTo((String)queryMap.get("userName"));
+			}
+			
+			if(!StringUtils.isEmpty((String)queryMap.get("password"))) {
+				String cipherPassword = SecurityUtil.getMd5(((String) queryMap.get("password")).trim());
+				ex.or().andPasswordEqualTo(cipherPassword);
+			}
+			
+			List<User> list = userMapper.selectByExample(ex);
+			return list;
+			
+		} catch(Exception e) {
+			logger.error("根据条件查询user发生异常", e);
+			return null;
+		}
 	}
 
 }

@@ -2,7 +2,11 @@ package com.bistu.intimate.dao;
 
 import com.bistu.intimate.dto.MajorDetail;
 import com.bistu.intimate.dto.MajorDetailExample;
+import com.bistu.intimate.vo.MajorDetailVo;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface MajorDetailMapper {
@@ -72,4 +76,11 @@ public interface MajorDetailMapper {
 	 * @mbggenerated  Tue Apr 12 22:32:36 CST 2016
 	 */
 	int updateByPrimaryKey(MajorDetail record);
+	
+	/**
+	 * 根据条件查询
+	 * @param maps
+	 * @return
+	 */
+	List<MajorDetailVo> getMajorDetailVoByConditions(Map<String, Object> maps);
 }

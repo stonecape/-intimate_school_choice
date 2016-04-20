@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>注册</title>
 	<link href="<%=basePath %>static/css/bootstrap.min.css" rel="stylesheet">
 	
-	<script src="<%=basePath %>static/js/jquery-1.7.2.min.js"></script>
+	<script src="<%=basePath %>static/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
     <script type="text/javascript">
     	function checkForm(){

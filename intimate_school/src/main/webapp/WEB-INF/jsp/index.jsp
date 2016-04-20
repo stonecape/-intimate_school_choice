@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath %>static/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<%=basePath %>static/css/main.css" rel="stylesheet">
 	
-	<script src="<%=basePath %>static/js/jquery-1.7.2.min.js"></script>
+	<script src="<%=basePath %>static/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
     
 </head>
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-4">
           <h2>专业搜索</h2>
           <p>专业的选择决定未来的方向，点击这里，收获新的自己 </p>
-          <p><a class="btn btn-default" href="#" role="button">搜专业 &raquo;</a></p>
+          <p><a class="btn btn-default" href="<%=basePath %>majorSearch/toMajorSearchView.do" role="button">搜专业 &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>院校搜索</h2>

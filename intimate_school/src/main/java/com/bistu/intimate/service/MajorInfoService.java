@@ -1,5 +1,6 @@
 package com.bistu.intimate.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.bistu.intimate.bean.MajorInfoQueryBean;
@@ -17,7 +18,26 @@ public interface MajorInfoService {
 	Pagination<MajorInfo> getMajorInfoPage(MajorInfoQueryBean queryBean);
 	
 	/**
-	 * 获取所有有效的专业信息
+	 * 根据majorId查
+	 * @param majorId
+	 * @return
+	 */
+	MajorInfo getMajorInfoById(Integer majorId);
+	
+	/**
+	 * 获取所有专业门类
+	 * @return
+	 */
+	List<String> getAllMajorClass();
+	
+	/**
+	 * 获取所有的专业类型
+	 * @return
+	 */
+	List<String> getAllMajorType();
+	
+	/**
+	 * 获取所有有效的专业名称
 	 * @return
 	 */
 	Map<Integer, String> getAllMajorInfoSelect();

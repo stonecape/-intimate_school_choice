@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link href="<%=basePath %>static/css/dashboard.css" rel="stylesheet">
 	
-	<script src="<%=basePath %>static/js/jquery-1.7.2.min.js"></script>
+	<script src="<%=basePath %>static/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
     <script src="<%=basePath %>static/js/bootstrap-table.js"></script>
     
@@ -39,6 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	        });
     	    	if(result.success == true) {
     	    		alert("添加成功");
+    	    	} else {
+    	    		alert("添加失败");
     	    	}
     	    }
     	  });
@@ -180,8 +182,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 				<div class="list-group">
-					<a href="#" class="list-group-item active">添加专业</a> <a href="#"
-						class="list-group-item">查看/编辑专业</a>
+					<a href="#" class="list-group-item active">添加专业</a> 
+					<a href="#" class="list-group-item">查看/编辑专业</a>
 				</div>
 			</div>
 			<!--/.sidebar-offcanvas-->

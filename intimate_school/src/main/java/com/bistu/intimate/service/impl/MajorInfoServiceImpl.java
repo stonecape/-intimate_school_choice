@@ -16,6 +16,7 @@ import com.bistu.intimate.common.Pagination;
 import com.bistu.intimate.dao.MajorInfoMapper;
 import com.bistu.intimate.dto.MajorInfo;
 import com.bistu.intimate.dto.MajorInfoExample;
+import com.bistu.intimate.dto.MajorInfoExample.Criteria;
 import com.bistu.intimate.service.MajorInfoService;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
@@ -36,24 +37,31 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 			logger.info("queryBean->" + ToStringBuilder.reflectionToString(queryBean));
 			
 			MajorInfoExample ex = new MajorInfoExample();
+			Criteria cr = ex.or();
 			
-			if(StringUtils.isEmpty(queryBean.getMajorClass())) {
-				ex.or().andMajorClassEqualTo(queryBean.getMajorClass());
+			if(!StringUtils.isEmpty(queryBean.getMajorClass())) {
+				cr.andMajorClassEqualTo(queryBean.getMajorClass());
 			}
-			if(StringUtils.isEmpty(queryBean.getMajorName())) {
-				ex.or().andMajorNameEqualTo(queryBean.getMajorName());
+			if(!StringUtils.isEmpty(queryBean.getMajorName())) {
+				cr.andMajorNameLike("%" + queryBean.getMajorName() + "%");
 			}
-			if(StringUtils.isEmpty(queryBean.getMajorType())) {
-				ex.or().andMajorTypeEqualTo(queryBean.getMajorType());
+			if(!StringUtils.isEmpty(queryBean.getMajorType())) {
+				cr.andMajorTypeEqualTo(queryBean.getMajorType());
 			}
 			
 			PageBounds pageBounds = new PageBounds();
 			pageBounds.setLimit(queryBean.getPageSize());
 			pageBounds.setPage(queryBean.getPageNo());
+			pageBounds.setContainsTotalCount(true);
+			
+			int totalCount = 0;
 			
 			List<MajorInfo> resList = majorInfoMapper.selectByExample(ex, pageBounds);
-			PageList<MajorInfo> pageList = (PageList<MajorInfo>) resList;
-			int totalCount = pageList.getPaginator().getTotalCount();
+			if(resList != null && resList.size() > 0) {
+				PageList<MajorInfo> pageList = (PageList<MajorInfo>) resList;
+				totalCount = pageList.getPaginator().getTotalCount();
+			}
+			
 			Pagination<MajorInfo> page = 
 					new Pagination<MajorInfo>(queryBean.getPageSize(), queryBean.getPageNo(), totalCount, resList);
 			logger.info("最后封装的分页返回值->" + ToStringBuilder.reflectionToString(page));
@@ -77,6 +85,37 @@ public class MajorInfoServiceImpl implements MajorInfoService{
 			}
 		}
 		return returnMap;
+	}
+
+	public List<String> getAllMajorClass() {
+		logger.info("=====getAllMajorClass=====");
+		try {
+			return majorInfoMapper.getDistinctMajorClass();
+		} catch(Exception e) {
+			logger.error("查询所有专业门类发生异常", e);
+			return null;
+		}
+		
+	}
+
+	public List<String> getAllMajorType() {
+		logger.info("=====getAllMajorType=====");
+		try {
+			return majorInfoMapper.getDistinctMajorType();
+		} catch(Exception e) {
+			logger.error("查询所有专业类型发生异常", e);
+			return null;
+		}
+	}
+
+	public MajorInfo getMajorInfoById(Integer majorId) {
+		logger.info("=====getMajorInfoById=====");
+		try {
+			return majorInfoMapper.selectByPrimaryKey(majorId);
+		} catch(Exception e) {
+			logger.error("getMajorInfoById发生异常", e);
+			return null;
+		}
 	}
 
 }

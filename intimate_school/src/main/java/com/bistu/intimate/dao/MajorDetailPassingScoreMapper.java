@@ -74,4 +74,5 @@ public interface MajorDetailPassingScoreMapper {
 	 * @mbggenerated  Tue Apr 12 22:32:36 CST 2016
 	 */
 	int updateByPrimaryKey(MajorDetailPassingScore record);
+	
 }

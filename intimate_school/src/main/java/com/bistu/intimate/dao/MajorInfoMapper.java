@@ -102,4 +102,17 @@ public interface MajorInfoMapper {
      * @mbggenerated Thu Apr 07 21:54:18 CST 2016
      */
     int updateByPrimaryKey(MajorInfo record);
+    
+    /**
+     * 获取所有专业门类
+     * @return
+     */
+    List<String> getDistinctMajorClass();
+    
+    /**
+     * 获取所有专业门类
+     * @return
+     */
+    List<String> getDistinctMajorType();
+    
 }
