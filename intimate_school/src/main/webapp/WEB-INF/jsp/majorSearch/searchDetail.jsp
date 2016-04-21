@@ -14,18 +14,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>专业详情</title>
 	<link href="<%=basePath %>static/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<%=basePath %>static/css/bootstrap-table.css" rel="stylesheet">
 	
 	<link href="<%=basePath %>static/css/dashboard.css" rel="stylesheet">
 	
 	<script src="<%=basePath %>static/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
-    <script src="<%=basePath %>static/js/bootstrap-table.js"></script>
     
-    <script type="text/javascript">
-    	$(document).ready(function(){
-    	});
-    	
+     <script type="text/javascript">
+		function collectMajorDetail(majorDetailId) {
+			var result;
+			$.ajax({
+	            type: "POST",
+	            url : "<%=basePath %>ajaxCollectionController/addNewCollection.do",
+		         	dataType: 'json',
+		        	async : false, 
+	            data:{"majorDetailId": majorDetailId}, 
+	            success: function(data) {
+	            	result = data;
+	            }
+	        });
+			if(result.success == true) {
+	    		alert("收藏成功");
+	    	} else {
+	    		alert("收藏失败");
+	    	}
+		}    	
     </script>
 </head>
 <body>
@@ -119,8 +132,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${item.participantNo }</td>
 						<td>${item.offerNo }</td>
 						<td>
-							<button type="button" class="btn btn-info">分数线</button>
-							<button type="button" class="btn btn-warning">收藏</button>
+							<button type="button" class="btn btn-info">
+								<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal">分数线</a>
+							</button>
+							<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
 						</td>
 					</tr>
 				
@@ -129,8 +144,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</c:if>
 			
 		</table>
-
 	</div>
+	
+<div class="modal fade" id="passingScoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>

@@ -43,6 +43,7 @@
               <value>/static</value> 
               <value>/user</value>
               <value>/ajaxUser</value> 
+              <value>/majorSearch</value>
             </list>  
           </property>  
         </bean>  

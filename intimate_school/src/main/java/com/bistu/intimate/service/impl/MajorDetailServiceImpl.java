@@ -22,6 +22,7 @@ import com.bistu.intimate.dao.MajorDetailMapper;
 import com.bistu.intimate.dao.MajorDetailPassingScoreMapper;
 import com.bistu.intimate.dto.MajorDetail;
 import com.bistu.intimate.dto.MajorDetailPassingScore;
+import com.bistu.intimate.dto.MajorDetailPassingScoreExample;
 import com.bistu.intimate.service.MajorDetailService;
 import com.bistu.intimate.vo.MajorDetailVo;
 
@@ -132,6 +133,23 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 			return null;
 		}
 		
+	}
+
+	public List<MajorDetailPassingScore> queryPassingScoreByMajorDetailId(Integer majorDetailId) {
+		logger.info("===查询分数线===");
+		if(majorDetailId == null || majorDetailId <= 0) {
+			logger.error("majorDetailId == null || majorDetailId <= 0");
+			return null;
+		}
+		try {
+			MajorDetailPassingScoreExample ex = new MajorDetailPassingScoreExample();
+			ex.or().andMajorDetialIdEqualTo(majorDetailId);
+			return detailPassingScoreMapper.selectByExample(ex);
+			
+		} catch(Exception e) {
+			logger.error("发生异常", e);
+			return null;
+		}
 	}
 
 }

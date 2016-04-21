@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath %>static/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<%=basePath %>static/css/main.css" rel="stylesheet">
 	
-    <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
+    <%-- <script src="<%=basePath %>static/js/bootstrap.min.js"></script> --%>
     
     <script type="text/javascript">
     	function jumptoSignUp() {

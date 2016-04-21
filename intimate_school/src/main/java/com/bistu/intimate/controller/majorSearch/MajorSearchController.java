@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bistu.intimate.bean.MajorInfoQueryBean;
 import com.bistu.intimate.common.Pagination;
 import com.bistu.intimate.controller.BaseController;
+import com.bistu.intimate.dto.MajorDetailPassingScore;
 import com.bistu.intimate.dto.MajorInfo;
 import com.bistu.intimate.service.MajorDetailService;
 import com.bistu.intimate.service.MajorInfoService;
@@ -77,6 +78,22 @@ public class MajorSearchController extends BaseController {
 		
 		return new ModelAndView("majorSearch/searchDetail", result);
 		
+	}
+	
+	@RequestMapping("/queryPassingScore")
+	public ModelAndView queryPassingScore(HttpServletRequest req) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		String majorDetailId = req.getParameter("majorDetailId");
+		if(StringUtils.isEmpty(majorDetailId)) {
+			logger.error("majorDetailId为空");
+			return new ModelAndView("majorSearch/passingScores", result);
+		}
+		
+		List<MajorDetailPassingScore> list = 
+				majorDetailService.queryPassingScoreByMajorDetailId(Integer.parseInt(majorDetailId));
+		
+		result.put("rows", list);
+		return new ModelAndView("majorSearch/passingScores", result);
 	}
 	
 	private Map<String, Object> initialView(Map<String, Object> result) {
