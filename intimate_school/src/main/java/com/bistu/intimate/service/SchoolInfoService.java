@@ -26,4 +26,11 @@ public interface SchoolInfoService {
 	 * @return
 	 */
 	Pagination<SchoolInfo> getSchoolInfoPage(SchoolInfoQueryBean queryBean);
+	
+	/**
+	 * 根据id获取学校信息
+	 * @param schoolId
+	 * @return
+	 */
+	SchoolInfo getSchoolInfoById(int schoolId);
 }

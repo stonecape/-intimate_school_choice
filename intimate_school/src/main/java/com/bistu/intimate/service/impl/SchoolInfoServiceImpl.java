@@ -142,4 +142,14 @@ public class SchoolInfoServiceImpl implements SchoolInfoService	{
 		return null;
 	}
 
+	public SchoolInfo getSchoolInfoById(int schoolId) {
+		logger.info("=====getSchoolInfoById=====");
+		try {
+			return schoolInfoMapper.selectByPrimaryKey(schoolId);
+		} catch(Exception e) {
+			logger.error("getSchoolInfoById发生异常", e);
+			return null;
+		}
+	}
+
 }

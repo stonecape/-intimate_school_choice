@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>专业详情</title>
+	<title>学校详情</title>
 	<link href="<%=basePath %>static/css/bootstrap.min.css" rel="stylesheet">
 	
 	<link href="<%=basePath %>static/css/dashboard.css" rel="stylesheet">
@@ -68,38 +68,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="col-xs-12 col-sm-9">
 				<form class="form-horizontal" id="submitForm" >
 					<div class="form-group">
-						<label for="majorName" class="col-sm-2 control-label">专业名称</label>
+						<label for="schoolName" class="col-sm-2 control-label">学校名称</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="majorName" id="majorName"
-								value="${majorInfo.majorName }" disabled>
+							<input type="text" class="form-control" name="schoolName" id="schoolName"
+								value="${schoolInfo.schoolName }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="majorClass" class="col-sm-2 control-label">专业门类</label>
+						<label for="province" class="col-sm-2 control-label">省市</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="majorName" id="majorClass"
-								value="${majorInfo.majorClass }" disabled>
+							<input type="text" class="form-control" name="province" id="province"
+								value="${schoolInfo.province }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="majorType" class="col-sm-2 control-label">专业类型</label>
+						<label for="area" class="col-sm-2 control-label">地区</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="majorName" id="majorType"
-								value="${majorInfo.majorType }" disabled>
+							<input type="text" class="form-control" name="area" id="area"
+								value="${schoolInfo.area }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="majorIntroduction" class="col-sm-2 control-label">专业介绍</label>
+						<label for="schoolProperty" class="col-sm-2 control-label">属性</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="schoolProperty" id="schoolProperty"
+								value="${schoolInfo.schoolProperty }" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="schoolType" class="col-sm-2 control-label">类型</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="schoolType" id="schoolType"
+								value="${schoolInfo.schoolType }" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="schoolCharacter" class="col-sm-2 control-label">性质</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="schoolCharacter" id="schoolCharacter"
+								value="${schoolInfo.schoolCharacter }" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="schoolRank" class="col-sm-2 control-label">排名</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="schoolRank" id="schoolRank"
+								value="${schoolInfo.schoolRank }" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="schoolTel" class="col-sm-2 control-label">联系电话</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="schoolTel" id="schoolTel"
+								value="${schoolInfo.schoolTel }" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="schoolIntroduction" class="col-sm-2 control-label">学校介绍</label>
 						<div class="col-sm-5">
 							<textarea class="form-control" rows="5"
-							name="majorIntroduction" id="majorIntroduction" disabled>${majorInfo.majorIntroduction}</textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="majorDirection" class="col-sm-2 control-label">专业方向</label>
-						<div class="col-sm-5">
-							<textarea class="form-control" rows="5"
-							name="majorDirection" id="majorDirection" disabled>${majorInfo.majorDirection}</textarea>
+							name="schoolIntroduction" id="schoolIntroduction" disabled>${schoolInfo.schoolIntroduction}</textarea>
 						</div>
 					</div>
 				</form>
@@ -109,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<table class="table table-hover">
 			<tr>
-				<th>学校名称</th>
+				<th>专业名称</th>
 				<th>招生人数</th>
 				<th>报名人数</th>
 				<th>录取人数</th>
@@ -118,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<c:if test="${detailVoList!=null}">
 				<c:forEach var="item" items="${detailVoList }">
 					<tr>
-						<td>${item.schoolName }</td>
+						<td>${item.majorName }</td>
 						<td>${item.enrollmentNo }</td>
 						<td>${item.participantNo }</td>
 						<td>${item.offerNo }</td>
