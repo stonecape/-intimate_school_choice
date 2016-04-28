@@ -26,17 +26,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		window.location.href="<%=basePath %>login/doLogout.do";
     	} 
 
-    	function checkForm(){
+    	function checkSubmitForm(){
     		var userName = $("#inputUserName").val();
 			var password = $("#inputPassword").val();
 			
 			if(userName.length < 1 || password.length < 1) {
 				alert("你的人生不完整")
-				return false;
+				return;
 			}
 			if(password.length < 6 || password.length > 12) {
 				alert("人生的密码为6-12位")
-				return false;
+				return;
 			}
 			
 			$.ajax({  
@@ -49,16 +49,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	 result = data;
 		         }  
 		    });
-			
 			if(result.success == false) {
 				alert("校验失败：" + result.msg);
-				return false;
+				return;
 			} else {
 				if(result.report == false) {
 					alert("用户名/密码不正确");
-					return false;
+					return;
 				} else {
-					return true;
+					$.ajax({  
+				        type : "POST",  
+				         url : "<%=basePath %>ajaxLogin/doLogin.do",
+				         dataType: 'json',
+				         data : {"userName":userName, "password":password },  
+				         async : false,  
+				         success : function(data){
+				        	 if(data.success) {
+				        		 location.reload();
+				        	 } else {
+				        		 alert("登录失败");
+				        	 }
+				        	 return;
+				         }  
+				    });
 				}
 			}
     	}
@@ -79,14 +92,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div id="navbar" class="navbar-collapse collapse">
         <c:choose>
      	  <c:when test="${sessionScope.loginUser == null}">
-	          <form class="navbar-form navbar-right" id="signInForm" method="post" onsubmit="return checkForm()" action="<%=basePath %>login/doLogin.do">
+	          <form class="navbar-form navbar-right" id="signInForm">
 	            <div class="form-group">
 	              <input type="text" id="inputUserName" name="userName" placeholder="用户名" class="form-control">
 	            </div>
 	            <div class="form-group">
 	              <input type="password" id="inputPassword" name="password" placeholder="密码" class="form-control">
 	            </div>
-	            <button type="submit" class="btn btn-success" id="submitForm">登陆 </button>
+	            <button type="button" class="btn btn-success" id="signInButton" onclick="javascript:checkSubmitForm()">登陆 </button>
 	            <button type="button" class="btn btn-default" id="signupButton" onclick="javascript:jumptoSignUp()">注册</button>
 	          </form>
           </c:when>

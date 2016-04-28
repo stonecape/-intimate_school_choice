@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-md-4">
           <h2>院校搜索</h2>
           <p>院校选择决定发展环境，点击这里，寻找施展自己的天地</p>
-          <p><a class="btn btn-default" href="#" role="button">搜学校 &raquo;</a></p>
+          <p><a class="btn btn-default" href="<%=basePath %>schoolSearch/toSchoolSearchView.do" role="button">搜学校 &raquo;</a></p>
        </div>
         <div class="col-md-4">
           <h2>收藏对比</h2>

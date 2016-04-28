@@ -1,7 +1,9 @@
 package com.bistu.intimate.service.impl;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,6 +66,32 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 			result.setSuccess(false);
 			return result;
 		}
+		
+	}
+
+	public Set<Integer> queryCollectMajorDetailIdByUserId(Integer userId) {
+		logger.info("queryCollectMajorDetailIdByUserId->userId:" + userId);
+		Set<Integer> result = new HashSet<Integer>();
+		try {
+			UserCollectionExample ex = new UserCollectionExample();
+			ex.or().andUserIdEqualTo(userId);
+			
+			List<UserCollection> list = userCollectionMapper.selectByExample(ex);
+			if(list == null || list.size() <= 0) {
+				logger.info("没有收藏");
+				return result;
+			}
+			
+			for(UserCollection collection : list) {
+				result.add(collection.getMajorDetailId());
+			}
+			return result;
+			
+		} catch(Exception e) {
+			logger.error("发生异常", e);
+			return result;
+		}
+		
 		
 	}
 

@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	    	if(result.success == true) {
     	    		alert("添加成功");
     	    	} else {
-    	    		alert("添加失败");
+    	    		alert(result.msg);
     	    	}
     	    }
     	  });
@@ -50,8 +50,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			var enrollmentNo = $("#enrollmentNo").val();
 			var participantNo = $("#participantNo").val();
 			var offerNo = $("#offerNo").val();
+			var lesson1Name = $("#lesson1Name").val();
+			var lesson2Name = $("#lesson2Name").val();
+			var lesson3Name = $("#lesson3Name").val();
+			var lesson4Name = $("#lesson4Name").val();
 			
-			if(enrollmentNo.length < 1 || participantNo.lengh < 1 || offerNo.length < 1) {
+			if(enrollmentNo.length < 1 || participantNo.lengh < 1 || offerNo.length < 1 || lesson1Name.length < 1
+					|| lesson2Name.length < 1 || lesson3Name.length < 1 || lesson4Name.length < 1) {
 				alert("参数不完整");
 				return false;
 			}
@@ -124,6 +129,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="col-sm-5">
 							<input type="number" min="0" class="form-control" name="offerNo" id="offerNo"
 								placeholder="录取人数">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="lesson1Name" class="col-sm-2 control-label">科目1名称</label>
+						<div class="col-sm-5">
+							<input type="text" min="0" class="form-control" name="lesson1Name" id="lesson1Name"
+								placeholder="科目1名称">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="lesson2Name" class="col-sm-2 control-label">科目2名称</label>
+						<div class="col-sm-5">
+							<input type="text" min="0" class="form-control" name="lesson2Name" id="lesson2Name"
+								placeholder="科目2名称">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="lesson3Name" class="col-sm-2 control-label">科目3名称</label>
+						<div class="col-sm-5">
+							<input type="text" min="0" class="form-control" name="lesson3Name" id="lesson3Name"
+								placeholder="科目3名称">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="lesson4Name" class="col-sm-2 control-label">科目2名称</label>
+						<div class="col-sm-5">
+							<input type="text" min="0" class="form-control" name="lesson4Name" id="lesson4Name"
+								placeholder="科目4名称">
 						</div>
 					</div>
 

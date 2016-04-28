@@ -28,10 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr>
 				<th>年份</th>
 				<th>总分数线</th>
-				<th>科目1</th>
-				<th>科目2</th>
-				<th>科目3</th>
-				<th>科目4</th>
+				<th>${majorDetail.lesson1Name }</th>
+				<th>${majorDetail.lesson2Name }</th>
+				<th>${majorDetail.lesson3Name }</th>
+				<th>${majorDetail.lesson4Name }</th>
 			</tr>
 			<c:if test="${rows!=null}">
 				<c:forEach var="item" items="${rows }">

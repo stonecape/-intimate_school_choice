@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.bistu.intimate.bean.MajorDetialAddBean;
 import com.bistu.intimate.common.Result;
+import com.bistu.intimate.dto.MajorDetail;
 import com.bistu.intimate.dto.MajorDetailPassingScore;
 import com.bistu.intimate.vo.MajorDetailVo;
 
@@ -22,6 +23,13 @@ public interface MajorDetailService {
 	 * @return
 	 */
 	List<MajorDetailVo> queryMajorDetailVoByConditions(Map<String, String> queryMap);
+	
+	/**
+	 * 根据majorDetailId查
+	 * @param majorDetailId
+	 * @return
+	 */
+	Result<MajorDetail> queryMajorDetailById(Integer majorDetailId);
 	
 	/**
 	 * 查询分数线

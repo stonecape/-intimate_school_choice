@@ -3,6 +3,7 @@ package com.bistu.intimate.controller.majorSearch;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,11 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bistu.intimate.bean.MajorInfoQueryBean;
 import com.bistu.intimate.common.Pagination;
+import com.bistu.intimate.common.Result;
 import com.bistu.intimate.controller.BaseController;
+import com.bistu.intimate.dto.MajorDetail;
 import com.bistu.intimate.dto.MajorDetailPassingScore;
 import com.bistu.intimate.dto.MajorInfo;
 import com.bistu.intimate.service.MajorDetailService;
 import com.bistu.intimate.service.MajorInfoService;
+import com.bistu.intimate.service.UserCollectionService;
 import com.bistu.intimate.vo.MajorDetailVo;
 
 @Controller
@@ -31,6 +35,8 @@ public class MajorSearchController extends BaseController {
 	private MajorInfoService majorInfoService;
 	@Autowired
 	private MajorDetailService majorDetailService;
+	@Autowired
+	private UserCollectionService userCollectionService;
 	
 	@RequestMapping("/toMajorSearchView")
 	public ModelAndView toMajorSearchView() {
@@ -74,6 +80,19 @@ public class MajorSearchController extends BaseController {
 		queryMap.put("majorId", majorId);
 		List<MajorDetailVo> detailVoList = 
 				majorDetailService.queryMajorDetailVoByConditions(queryMap);
+		
+		// 查询收藏
+		if(this.getSessionUser(req) != null) {
+			Set<Integer> collectedMajorDetailIds = 
+					userCollectionService.queryCollectMajorDetailIdByUserId(this.getSessionUser(req).getUserId());
+			if(collectedMajorDetailIds != null && collectedMajorDetailIds.size() > 0) {
+				for(MajorDetailVo detailVo : detailVoList) {
+					if(collectedMajorDetailIds.contains(detailVo.getMajorDetailId())) {
+						detailVo.setCollect(true);
+					}
+				}
+			}
+		}
 		result.put("detailVoList", detailVoList);
 		
 		return new ModelAndView("majorSearch/searchDetail", result);
@@ -88,7 +107,16 @@ public class MajorSearchController extends BaseController {
 			logger.error("majorDetailId为空");
 			return new ModelAndView("majorSearch/passingScores", result);
 		}
+		// 查专业科目
+		Result<MajorDetail> majorDetailResult = 
+				majorDetailService.queryMajorDetailById(Integer.parseInt(majorDetailId));
 		
+		if(majorDetailResult.getSuccess() && majorDetailResult.getValue() != null) {
+			MajorDetail majorDetail = majorDetailResult.getValue();
+			result.put("majorDetail", majorDetail);
+		}
+		
+		// 差分数线
 		List<MajorDetailPassingScore> list = 
 				majorDetailService.queryPassingScoreByMajorDetailId(Integer.parseInt(majorDetailId));
 		

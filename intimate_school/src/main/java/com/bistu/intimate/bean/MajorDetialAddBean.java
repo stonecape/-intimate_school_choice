@@ -9,6 +9,10 @@ public class MajorDetialAddBean extends BaseBean{
 	private int enrollmentNo;
 	private int participantNo;
 	private int offerNo;
+	private String lesson1Name;
+	private String lesson2Name;
+	private String lesson3Name;
+	private String lesson4Name;
 	
 	private String year1;
 	private int totalPassingScore1;
@@ -170,5 +174,28 @@ public class MajorDetialAddBean extends BaseBean{
 	public void setLesson4PassingScore3(int lesson4PassingScore3) {
 		this.lesson4PassingScore3 = lesson4PassingScore3;
 	}
-	
+	public String getLesson1Name() {
+		return lesson1Name;
+	}
+	public void setLesson1Name(String lesson1Name) {
+		this.lesson1Name = lesson1Name;
+	}
+	public String getLesson2Name() {
+		return lesson2Name;
+	}
+	public void setLesson2Name(String lesson2Name) {
+		this.lesson2Name = lesson2Name;
+	}
+	public String getLesson3Name() {
+		return lesson3Name;
+	}
+	public void setLesson3Name(String lesson3Name) {
+		this.lesson3Name = lesson3Name;
+	}
+	public String getLesson4Name() {
+		return lesson4Name;
+	}
+	public void setLesson4Name(String lesson4Name) {
+		this.lesson4Name = lesson4Name;
+	}
 }

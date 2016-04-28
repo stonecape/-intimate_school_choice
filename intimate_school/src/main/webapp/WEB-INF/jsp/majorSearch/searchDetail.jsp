@@ -22,6 +22,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
      <script type="text/javascript">
 		function collectMajorDetail(majorDetailId) {
+			var isLoginResult;
+			$.ajax({
+	            type: "POST",
+	            url : "<%=basePath %>ajaxLogin/checkIsLogin.do",
+		         	dataType: 'json',
+		        	async : false, 
+	            success: function(data) {
+	            	isLoginResult = data;
+	            }
+	        });
+			
+			if(isLoginResult.isLogin == false) {
+				alert("登陆，让我知道你是谁~");
+				return;
+			}
+			
 			var result;
 			$.ajax({
 	            type: "POST",
@@ -38,6 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	} else {
 	    		alert("收藏失败");
 	    	}
+			location.reload();
 		}    	
     </script>
 </head>
@@ -86,32 +103,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 				</form>
-				<hr>
-				<table class="table">
-					<tr>
-						<th>科目1</th>
-						<th>科目2</th>
-						<th>科目3</th>
-						<th>科目4</th>
-					</tr>
-					<tr>
-						<td>
-							${majorInfo.lesson1Name }
-						</td>
-						
-						<td>
-							${majorInfo.lesson2Name }
-						</td>
-						
-						<td>
-							${majorInfo.lesson3Name }
-						</td>
-						
-						<td>
-							${majorInfo.lesson4Name }
-						</td>
-					</tr>
-				</table>
 			</div>
 		</div>
 		<hr>
@@ -135,7 +126,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<button type="button" class="btn btn-info">
 								<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal">分数线</a>
 							</button>
-							<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
+							<c:if test="${item.collect == false}">
+								<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
+							</c:if>
+							<c:if test="${item.collect == true}">
+								<button type="button" class="btn btn-default" >已收藏</button>
+							</c:if>
 						</td>
 					</tr>
 				

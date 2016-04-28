@@ -1,6 +1,7 @@
 package com.bistu.intimate.controller.admin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.bistu.intimate.bean.MajorDetialAddBean;
 import com.bistu.intimate.common.Result;
 import com.bistu.intimate.controller.BaseController;
 import com.bistu.intimate.service.MajorDetailService;
+import com.bistu.intimate.vo.MajorDetailVo;
 
 @Controller
 @RequestMapping("/ajaxAdmin")
@@ -31,11 +33,25 @@ public class AjaxAdminController extends BaseController{
 		Map<String, Object> result = new HashMap<String, Object>();
 		logger.info("===添加专业详情===");
 		logger.info("addBean->" + ToStringBuilder.reflectionToString(addBean));
+		
+		// 1. 校验是否存在同样的学校同样的专业
+		Map<String, String> queryMap = new HashMap<String, String>();
+		queryMap.put("majorId", addBean.getMajorId() + "");
+		queryMap.put("schoolId", addBean.getSchoolId() + "");
+		List<MajorDetailVo> majorDetailVos = majorDetailService.queryMajorDetailVoByConditions(queryMap);
+		if(majorDetailVos != null && majorDetailVos.size() > 0) {
+			result.put("success", false);
+			result.put("msg", "相同的学校专业已经存在");
+			return result;
+		}
+		
+		// 2. 若没有 插入
 		Result<Boolean> correspond = majorDetailService.addNewMajorDetail(addBean);
 		if(correspond.getSuccess()) {
 			result.put("success", true);
 		} else {
 			result.put("success", false);
+			result.put("msg", "插入失败，请联系管理员");
 		}
 		return result;
 		

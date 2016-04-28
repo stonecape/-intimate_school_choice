@@ -152,4 +152,29 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 		}
 	}
 
+	public Result<MajorDetail> queryMajorDetailById(Integer majorDetailId) {
+		logger.info("===根据id查majorDetail===,majorDetailId:" + majorDetailId);
+		Result<MajorDetail> result = new Result<MajorDetail>();
+		if(majorDetailId == null || majorDetailId <= 0) {
+			result.setSuccess(false);
+			logger.error("参数异常");
+			return result;
+		}
+		
+		try {
+			MajorDetail majorDetail = majorDetailMapper.selectByPrimaryKey(majorDetailId);
+			
+			result.setSuccess(true);
+			if(majorDetail != null) {
+				result.setValue(majorDetail);
+			}
+			
+		} catch(Exception e) {
+			result.setSuccess(false);
+			logger.error("发生异常", e);
+		}
+		
+		return result;
+	}
+
 }

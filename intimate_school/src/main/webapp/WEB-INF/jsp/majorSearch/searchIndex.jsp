@@ -112,10 +112,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>名称</th>
 				<th>门类</th>
 				<th>类型</th>
-				<th>科目1</th>
-				<th>科目2</th>
-				<th>科目3</th>
-				<th>科目4</th>
 				<th>操作</th>
 			</tr>
 			<c:if test="${rows.datas!=null}">
@@ -124,10 +120,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${item.majorName }</td>
 						<td>${item.majorClass }</td>
 						<td>${item.majorType }</td>
-						<td>${item.lesson1Name }</td>
-						<td>${item.lesson2Name }</td>
-						<td>${item.lesson3Name }</td>
-						<td>${item.lesson4Name }</td>
 						<td><a href="<%=basePath %>majorSearch/queryMajorInfoDetail.do?majorId=${item.majorId }">查看详情</a></td>
 					</tr>
 				

@@ -44,6 +44,11 @@ public class MajorDetailVo implements Serializable {
 	 * 录取人数
 	 */
 	private Integer offerNo;
+	
+	/**
+	 * 是否收藏
+	 */
+	private boolean collect;
 
 	public Integer getMajorDetailId() {
 		return majorDetailId;
@@ -108,6 +113,14 @@ public class MajorDetailVo implements Serializable {
 	public void setOfferNo(Integer offerNo) {
 		this.offerNo = offerNo;
 	}
-	
 
+	public boolean isCollect() {
+		return collect;
+	}
+
+	public void setCollect(boolean collect) {
+		this.collect = collect;
+	}
+
+	
 }
