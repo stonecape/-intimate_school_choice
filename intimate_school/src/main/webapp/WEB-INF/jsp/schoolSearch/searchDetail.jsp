@@ -154,6 +154,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<button type="button" class="btn btn-info">
 								<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal">分数线</a>
 							</button>
+							<button type="button" class="btn btn-success">
+								<a href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }">详情</a>
+							</button>
 							<c:if test="${item.collect == false}">
 								<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
 							</c:if>

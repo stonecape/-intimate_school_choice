@@ -442,6 +442,10 @@
         <if test="majorId != null and majorId != ''">
                 and  detail.major_id = #{majorId}
         </if>
+        
+        <if test="majorDetailId != null and majorDetailId != ''">
+                and  detail.major_detail_id = #{majorDetailId}
+        </if>
         and detail.yn=1
      	
   </select>

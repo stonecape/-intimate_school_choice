@@ -126,6 +126,10 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 			dbQuery.put("schoolId", Integer.parseInt(queryMap.get("schoolId")));
 		}
 		
+		if(StringUtils.isNotEmpty(queryMap.get("majorDetailId"))) {
+			dbQuery.put("majorDetailId", Integer.parseInt(queryMap.get("majorDetailId")));
+		}
+		
 		try {
 			return majorDetailMapper.getMajorDetailVoByConditions(dbQuery);
 		} catch(Exception e) {

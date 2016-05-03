@@ -46,6 +46,7 @@
               <value>/ajaxUser</value> 
               <value>/majorSearch</value>
               <value>/schoolSearch</value>
+              <value>/majorDetail</value>
             </list>  
           </property>  
         </bean>  

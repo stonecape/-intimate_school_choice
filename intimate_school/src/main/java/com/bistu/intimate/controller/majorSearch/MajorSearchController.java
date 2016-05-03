@@ -116,7 +116,7 @@ public class MajorSearchController extends BaseController {
 			result.put("majorDetail", majorDetail);
 		}
 		
-		// 差分数线
+		// 查分数线
 		List<MajorDetailPassingScore> list = 
 				majorDetailService.queryPassingScoreByMajorDetailId(Integer.parseInt(majorDetailId));
 		

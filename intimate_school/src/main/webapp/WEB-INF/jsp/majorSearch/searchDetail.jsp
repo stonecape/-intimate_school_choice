@@ -77,14 +77,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="form-group">
 						<label for="majorClass" class="col-sm-2 control-label">专业门类</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="majorName" id="majorClass"
+							<input type="text" class="form-control" name="majorClass" id="majorClass"
 								value="${majorInfo.majorClass }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="majorType" class="col-sm-2 control-label">专业类型</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="majorName" id="majorType"
+							<input type="text" class="form-control" name="majorType" id="majorType"
 								value="${majorInfo.majorType }" disabled>
 						</div>
 					</div>
@@ -125,6 +125,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>
 							<button type="button" class="btn btn-info">
 								<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal">分数线</a>
+							</button>
+							<button type="button" class="btn btn-success">
+								<a href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }">详情</a>
 							</button>
 							<c:if test="${item.collect == false}">
 								<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
