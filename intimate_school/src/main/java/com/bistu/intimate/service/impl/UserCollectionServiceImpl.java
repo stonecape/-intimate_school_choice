@@ -15,6 +15,7 @@ import com.bistu.intimate.dao.UserCollectionMapper;
 import com.bistu.intimate.dto.UserCollection;
 import com.bistu.intimate.dto.UserCollectionExample;
 import com.bistu.intimate.service.UserCollectionService;
+import com.bistu.intimate.vo.MajorDetailVo;
 
 @Service
 public class UserCollectionServiceImpl implements UserCollectionService {
@@ -92,6 +93,17 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 			return result;
 		}
 		
+		
+	}
+
+	public List<MajorDetailVo> queryCollectedMajorDetailByUserId(Integer userId) {
+		logger.info("queryCollectedMajorDetailByUserId->userId:" + userId);
+		try {
+			return userCollectionMapper.queryCollectedMajorDetailByUserId(userId);
+		} catch(Exception e) {
+			logger.error("发生异常", e);
+			return null;
+		}
 		
 	}
 

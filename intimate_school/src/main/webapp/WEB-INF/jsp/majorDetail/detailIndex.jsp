@@ -120,9 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="form-group">
 						<label class="col-sm-2 control-label">分数线</label>
 						<div class="col-sm-5">
-							<button type="button" class="btn btn-info">
-								<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${majorDetailVo.majorDetailId }" data-target="#passingScoreModal">分数线</a>
-							</button>
+							<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${majorDetailVo.majorDetailId }" data-target="#passingScoreModal" class="btn btn-primary" role="button">分数线</a>
 						</div>
 					</div>
 					

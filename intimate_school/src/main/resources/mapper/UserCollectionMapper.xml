@@ -14,6 +14,18 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="MajorDetailVoResultMap" type="com.bistu.intimate.vo.MajorDetailVo" >
+    <id column="major_detail_id" property="majorDetailId" jdbcType="INTEGER" />
+    <result column="school_id" property="schoolId" jdbcType="INTEGER" />
+    <result column="major_id" property="majorId" jdbcType="INTEGER" />
+    <result column="school_name" property="schoolName" jdbcType="VARCHAR" />
+    <result column="major_name" property="majorName" jdbcType="VARCHAR" />
+    <result column="enrollment_no" property="enrollmentNo" jdbcType="INTEGER" />
+    <result column="participant_no" property="participantNo" jdbcType="INTEGER" />
+    <result column="offer_no" property="offerNo" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
@@ -300,4 +312,24 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where collection_id = #{collectionId,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryCollectedMajorDetailByUserId" resultMap="MajorDetailVoResultMap" parameterType="java.lang.Integer">
+  	  select detail.major_detail_id, detail.school_id, detail.major_id, 
+      	     info.major_name, school.school_name
+      
+      from user_collection coll 
+      left join major_detail detail 
+      on coll.major_detail_id = detail.major_detail_id
+      
+      left join major_info info
+      on detail.major_id = info.major_id
+      
+      left join school_info school
+      on detail.school_id = school.school_id
+      
+      where
+      coll.user_id = #{userId,jdbcType=INTEGER}
+      and
+      coll.yn = 1
+  </select>
 </mapper>

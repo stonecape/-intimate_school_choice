@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var result;
 			$.ajax({
 	            type: "POST",
-	            url : "<%=basePath %>ajaxCollectionController/addNewCollection.do",
+	            url : "<%=basePath %>ajaxCollection/addNewCollection.do",
 		         	dataType: 'json',
 		        	async : false, 
 	            data:{"majorDetailId": majorDetailId}, 
@@ -123,12 +123,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${item.participantNo }</td>
 						<td>${item.offerNo }</td>
 						<td>
-							<button type="button" class="btn btn-info">
-								<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal">分数线</a>
-							</button>
-							<button type="button" class="btn btn-success">
-								<a href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }">详情</a>
-							</button>
+							<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal" class="btn btn-primary" role="button">分数线</a>
+							<a href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }" class="btn btn-success" role="button">详情</a>
 							<c:if test="${item.collect == false}">
 								<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
 							</c:if>

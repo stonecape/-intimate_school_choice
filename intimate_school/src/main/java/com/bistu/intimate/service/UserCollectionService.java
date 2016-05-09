@@ -1,8 +1,10 @@
 package com.bistu.intimate.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.bistu.intimate.common.Result;
+import com.bistu.intimate.vo.MajorDetailVo;
 
 public interface UserCollectionService {
 	/**
@@ -19,4 +21,11 @@ public interface UserCollectionService {
 	 * @return
 	 */
 	Set<Integer> queryCollectMajorDetailIdByUserId(Integer userId);
+	
+	/**
+	 * 根据userId查VO
+	 * @param userId
+	 * @return
+	 */
+	List<MajorDetailVo> queryCollectedMajorDetailByUserId(Integer userId);
 }

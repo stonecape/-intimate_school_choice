@@ -9,11 +9,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bistu.intimate.constant.LoginConstant;
-import com.bistu.intimate.controller.login.LoginController;
+import com.bistu.intimate.dto.User;
 
 public class LoginInterceptor implements HandlerInterceptor {
 	Log logger = LogFactory.getLog(LoginInterceptor.class);
 	public String[] ignorePath ;
+	public String[] adminPath;
 	
 	public String[] getIgnorePath() {
 		return ignorePath;
@@ -21,6 +22,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	public void setIgnorePath(String[] ignorePath) {
 		this.ignorePath = ignorePath;
+	}
+
+	public String[] getAdminPath() {
+		return adminPath;
+	}
+
+	public void setAdminPath(String[] adminPath) {
+		this.adminPath = adminPath;
 	}
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -39,6 +48,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 	    //如果用户已经登录 放行    
 	    if(request.getSession().getAttribute(LoginConstant.ATTR_USER) != null) {  
 	        //更好的实现方式的使用cookie  
+	    	for(String admin : adminPath) {
+	    		if(requestUrl.contains(admin)) {
+	    			User user = (User)request.getSession().getAttribute(LoginConstant.ATTR_USER);
+		    		if(user.getIsManager() == null || user.getIsManager() != 1) {
+		    			logger.error("非管理员没有进入权限");
+		    			response.sendRedirect(request.getContextPath());
+		    			return false;
+		    		}
+		    	}
+	    	}
 	        return true;  
 	    }  
 	          

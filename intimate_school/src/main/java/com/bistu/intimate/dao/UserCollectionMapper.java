@@ -2,6 +2,8 @@ package com.bistu.intimate.dao;
 
 import com.bistu.intimate.dto.UserCollection;
 import com.bistu.intimate.dto.UserCollectionExample;
+import com.bistu.intimate.vo.MajorDetailVo;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -73,4 +75,11 @@ public interface UserCollectionMapper {
 	 * @mbggenerated  Tue Apr 12 22:32:36 CST 2016
 	 */
 	int updateByPrimaryKey(UserCollection record);
+	
+	/**
+	 * 根据userId查Vo
+	 * @param userId
+	 * @return
+	 */
+	List<MajorDetailVo> queryCollectedMajorDetailByUserId(Integer userId);
 }

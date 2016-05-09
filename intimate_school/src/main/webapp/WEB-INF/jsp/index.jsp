@@ -43,9 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <p><a class="btn btn-default" href="<%=basePath %>schoolSearch/toSchoolSearchView.do" role="button">搜学校 &raquo;</a></p>
        </div>
         <div class="col-md-4">
-          <h2>收藏对比</h2>
+          <h2>我的收藏</h2>
           <p>不想错失每一次机会？点击这里，梳理眼花缭乱的自己</p>
-          <p><a class="btn btn-default" href="#" role="button">我的收藏 &raquo;</a></p>
+          <p><a class="btn btn-default" href="<%=basePath %>collection/toMyCollectionView.do" role="button">我的收藏 &raquo;</a></p>
         </div>
       </div>
 

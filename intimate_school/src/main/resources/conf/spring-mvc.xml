@@ -48,7 +48,13 @@
               <value>/schoolSearch</value>
               <value>/majorDetail</value>
             </list>  
-          </property>  
+          </property> 
+          <property name="adminPath">  
+            <list>  
+              <value>/admin</value>  
+              <value>/ajaxAdmin</value>  
+            </list>  
+          </property>   
         </bean>  
       </mvc:interceptor>  
     </mvc:interceptors>   

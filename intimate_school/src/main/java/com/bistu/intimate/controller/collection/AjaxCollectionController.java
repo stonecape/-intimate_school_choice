@@ -19,7 +19,7 @@ import com.bistu.intimate.dto.User;
 import com.bistu.intimate.service.UserCollectionService;
 
 @Controller
-@RequestMapping("/ajaxCollectionController")
+@RequestMapping("/ajaxCollection")
 public class AjaxCollectionController extends BaseController{
 	Log logger = LogFactory.getLog(AjaxCollectionController.class);
 	@Autowired

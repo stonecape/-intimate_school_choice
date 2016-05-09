@@ -101,6 +101,6 @@ public class LoginController extends BaseController {
 	public ModelAndView doLogout(HttpServletRequest req) {
 		logger.info("==登出==");
 		this.removeSessionUser(req);
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/");
 	}
 }
