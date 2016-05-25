@@ -22,7 +22,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    </script>
+	function deleteCollection(majorDetailId) {
+		$.ajax({  
+	        type : "POST",  
+	         url : "<%=basePath %>ajaxCollection/delete.do",
+	         dataType: 'json',
+	         data : {"majorDetailId":majorDetailId},  
+	         async : false,  
+	         success : function(data){
+	        	 if(data.success == false) {
+	 				alert("取消关注失败");
+	 			} else {
+	 				alert("取消关注成功");
+	 			}
+	        	 location.reload();
+	         }  
+	    });
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="${basePath}/static/common/nav.jsp" />
@@ -37,7 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h3>${item.schoolName }</h3>
 								<p>${item.majorName }</p>
 								<p>
-									<a href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }" class="btn btn-primary" role="button">看详情</a>
+									<a
+										href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }"
+										class="btn btn-primary" role="button">看详情</a>
+									<button class="btn btn-success" role="button" onclick="javascript:deleteCollection(${item.majorDetailId })">取消关注</button>
 								</p>
 							</div>
 						</div>

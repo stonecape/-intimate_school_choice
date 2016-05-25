@@ -51,11 +51,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		$('#pageDiv').bootstrapPaginator(options);
 		
-		
-		$("#submitForm").click(function() {
-			$("#pageNo").val(0);
-		});
 	});
+	
+	function submitFormButton() {
+		$("#pageNo").val(0);
+		$("#schoolSearchForm").submit();
+	}
 </script>
 </head>
 <body>
@@ -146,7 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				<input type="hidden" value="${pageNo }" name="pageNo" id="pageNo"/>
-				<button type="submit" class="btn btn-default" id="submitForm">搜索</button>
+				<button type="button" class="btn btn-default" onclick="javascript:submitFormButton()" id="submitForm">搜索</button>
 			</form>
 		</div>
 		<!--/row-->

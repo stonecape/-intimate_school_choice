@@ -60,4 +60,30 @@ public class AjaxCollectionController extends BaseController{
 		}
 		
 	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String, Object> deleteCollection(HttpServletRequest req) {
+		logger.info("deleteCollection");
+		String majorDetailId = req.getParameter("majorDetailId");
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		User user = this.getSessionUser(req);
+		if(user == null) {
+			logger.error("未登陆");
+			result.put("success", false);
+			return result;
+		}
+		
+		Result<Boolean> re = 
+				userCollectionService.deleteCollection(user.getUserId(), Integer.parseInt(majorDetailId));
+		if(re.getSuccess() && re.getValue()) {
+			logger.info("取消关注成功");
+			result.put("success", true);
+			return result;
+		}
+		
+		result.put("success", false);
+		return result;
+	}
 }

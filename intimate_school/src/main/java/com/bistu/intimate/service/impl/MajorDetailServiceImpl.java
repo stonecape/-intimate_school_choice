@@ -81,6 +81,65 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 		
 	}
 	
+	public Result<Boolean> updateMajorDetail(MajorDetialAddBean updateBean, Integer majorDetailId) {
+		logger.info("=====添加新的专业信息=====");
+		Result<Boolean> result = new Result<Boolean>();
+		logger.info(
+				"updateBean->" + ToStringBuilder.reflectionToString(updateBean) + "|majorDetailId->" + majorDetailId);
+		try {
+			// 1. 拼装专业详情并更新数据库
+			MajorDetail majorDetail = new MajorDetail();
+			BeanUtils.copyProperties(updateBean, majorDetail);
+			majorDetail.setMajorDetailId(majorDetailId);
+			majorDetail.setYn((byte) 1);
+			majorDetail.setCreateTime(new Date());
+			int updateLine = majorDetailMapper.updateByPrimaryKeySelective(majorDetail);
+			if(updateLine <= 0) {
+				result.setSuccess(false);
+				logger.error("专业详情更新数据库失败");
+				return result;
+			}
+			
+			// 2. 更新原始分数线数据为无效
+			MajorDetailPassingScoreExample ex = new MajorDetailPassingScoreExample();
+			ex.or().andMajorDetialIdEqualTo(majorDetailId);
+			MajorDetailPassingScore passingScore = new MajorDetailPassingScore();
+			passingScore.setYn((byte)0);
+			
+			int toyn0Line = detailPassingScoreMapper.updateByExampleSelective(passingScore, ex);
+			if(toyn0Line <= 0) {
+				result.setSuccess(false);
+				logger.error("原始分数线数据失效失败");
+				return result;
+			}
+			
+			//3. 拼装分数线并插入数据库
+			List<MajorDetailPassingScore> passingScores = new ArrayList<MajorDetailPassingScore>();
+			passingScores.add(getPassingScoreByConditions(majorDetailId, updateBean.getYear1(), updateBean.getTotalPassingScore1(),
+					updateBean.getLesson1PassingScore1(), updateBean.getLesson2PassingScore1(),
+					updateBean.getLesson3PassingScore1(), updateBean.getLesson4PassingScore1()));
+			passingScores.add(getPassingScoreByConditions(majorDetailId, updateBean.getYear2(), updateBean.getTotalPassingScore2(),
+					updateBean.getLesson1PassingScore2(), updateBean.getLesson2PassingScore2(),
+					updateBean.getLesson3PassingScore2(), updateBean.getLesson4PassingScore2()));
+			passingScores.add(getPassingScoreByConditions(majorDetailId, updateBean.getYear3(), updateBean.getTotalPassingScore3(),
+					updateBean.getLesson1PassingScore3(), updateBean.getLesson2PassingScore3(),
+					updateBean.getLesson3PassingScore3(), updateBean.getLesson4PassingScore3()));
+			
+			for(MajorDetailPassingScore dto : passingScores) {
+				detailPassingScoreMapper.insertSelective(dto);
+			}
+			
+			result.setSuccess(true);
+			return result;
+		} catch(Exception e) {
+			result.setSuccess(false);
+			logger.error("专业详情和分数线更新数据库操作异常", e);
+			return result;
+		}
+		
+		
+	}
+	
 	private MajorDetailPassingScore getPassingScoreByConditions(int MajorDetialId, String year, int total, int lesson1, 
 			int lesson2, int lesson3, int lesson4) {
 		MajorDetailPassingScore returnScore = new MajorDetailPassingScore();
@@ -147,7 +206,7 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 		}
 		try {
 			MajorDetailPassingScoreExample ex = new MajorDetailPassingScoreExample();
-			ex.or().andMajorDetialIdEqualTo(majorDetailId);
+			ex.or().andMajorDetialIdEqualTo(majorDetailId).andYnEqualTo((byte)1);
 			return detailPassingScoreMapper.selectByExample(ex);
 			
 		} catch(Exception e) {
@@ -180,5 +239,6 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 		
 		return result;
 	}
+
 
 }

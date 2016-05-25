@@ -34,7 +34,7 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 		
 		try {
 			UserCollectionExample ex = new UserCollectionExample();
-			ex.or().andUserIdEqualTo(userId).andMajorDetailIdEqualTo(majorDetailId);
+			ex.or().andUserIdEqualTo(userId).andMajorDetailIdEqualTo(majorDetailId).andYnEqualTo((byte)1);
 			List<UserCollection> currentList = userCollectionMapper.selectByExample(ex);
 			
 			if(currentList != null && currentList.size() > 0) {
@@ -75,7 +75,7 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 		Set<Integer> result = new HashSet<Integer>();
 		try {
 			UserCollectionExample ex = new UserCollectionExample();
-			ex.or().andUserIdEqualTo(userId);
+			ex.or().andUserIdEqualTo(userId).andYnEqualTo((byte)1);
 			
 			List<UserCollection> list = userCollectionMapper.selectByExample(ex);
 			if(list == null || list.size() <= 0) {
@@ -105,6 +105,39 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 			return null;
 		}
 		
+	}
+
+	public Result<Boolean> deleteCollection(Integer userId, Integer majorDetailId) {
+		logger.info("===取消收藏service===userId:" + userId + ",majorDetailId:" + majorDetailId);
+		Result<Boolean> result = new Result<Boolean>();
+		if(userId == null || majorDetailId == null || userId <= 0 || majorDetailId <= 0) {
+			logger.error("参数异常");
+			result.setSuccess(false);
+			return result;
+		}
+		
+		try {
+			UserCollectionExample ex = new UserCollectionExample();
+			ex.or().andUserIdEqualTo(userId).andMajorDetailIdEqualTo(majorDetailId).andYnEqualTo((byte)1);
+			
+			UserCollection userCollection = new UserCollection();
+			userCollection.setYn((byte)0);
+			
+			int line = userCollectionMapper.updateByExampleSelective(userCollection, ex);
+			if(line > 0) {
+				result.setValue(true);
+			} else {
+				logger.error("数据库update失败");
+				result.setValue(false);
+			}
+			
+			result.setSuccess(true);
+			return result;
+		} catch(Exception e) {
+			logger.error("发生异常", e);
+			result.setSuccess(false);
+			return result;
+		}
 	}
 
 }

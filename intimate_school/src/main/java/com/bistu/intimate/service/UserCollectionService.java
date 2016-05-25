@@ -28,4 +28,12 @@ public interface UserCollectionService {
 	 * @return
 	 */
 	List<MajorDetailVo> queryCollectedMajorDetailByUserId(Integer userId);
+	
+	/**
+	 * 取消收藏
+	 * @param userId
+	 * @param majorDetailId
+	 * @return
+	 */
+	Result<Boolean> deleteCollection(Integer userId, Integer majorDetailId);
 }
