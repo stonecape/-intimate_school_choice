@@ -1,31 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page isELIgnored ="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <html>
 <head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>学校详情</title>
-	<link href="<%=basePath %>static/css/bootstrap.min.css" rel="stylesheet">
-	
-	<link href="<%=basePath %>static/css/dashboard.css" rel="stylesheet">
-	
-	<script src="<%=basePath %>static/js/jquery-1.9.1.min.js"></script>
-    <script src="<%=basePath %>static/js/bootstrap.min.js"></script>
-    
-     <script type="text/javascript">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学校详情</title>
+<link href="<%=basePath%>static/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="<%=basePath%>static/css/dashboard.css" rel="stylesheet">
+
+<script src="<%=basePath%>static/js/jquery-1.9.1.min.js"></script>
+<script src="<%=basePath%>static/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
 		function collectMajorDetail(majorDetailId) {
 			var isLoginResult;
 			$.ajax({
 	            type: "POST",
-	            url : "<%=basePath %>ajaxLogin/checkIsLogin.do",
+	            url : "<%=basePath%>ajaxLogin/checkIsLogin.do",
 		         	dataType: 'json',
 		        	async : false, 
 	            success: function(data) {
@@ -41,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var result;
 			$.ajax({
 	            type: "POST",
-	            url : "<%=basePath %>ajaxCollection/addNewCollection.do",
+	            url : "<%=basePath%>ajaxCollection/addNewCollection.do",
 		         	dataType: 'json',
 		        	async : false, 
 	            data:{"majorDetailId": majorDetailId}, 
@@ -59,26 +61,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 </head>
 <body>
-	<jsp:include page="${basePath}/static/common/nav.jsp"/>
+	<jsp:include page="${basePath}/static/common/nav.jsp" />
 
 	<div class="container">
 		<div class="row row-offcanvas row-offcanvas-right"
 			style="margin-top: 15px; top: 10px;">
 
 			<div class="col-xs-12 col-sm-9">
-				<form class="form-horizontal" id="submitForm" >
+				<form class="form-horizontal" id="submitForm">
 					<div class="form-group">
 						<label for="schoolName" class="col-sm-2 control-label">学校名称</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="schoolName" id="schoolName"
-								value="${schoolInfo.schoolName }" disabled>
+							<input type="text" class="form-control" name="schoolName"
+								id="schoolName" value="${schoolInfo.schoolName }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="province" class="col-sm-2 control-label">省市</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="province" id="province"
-								value="${schoolInfo.province }" disabled>
+							<input type="text" class="form-control" name="province"
+								id="province" value="${schoolInfo.province }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -91,50 +93,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="form-group">
 						<label for="schoolProperty" class="col-sm-2 control-label">属性</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="schoolProperty" id="schoolProperty"
-								value="${schoolInfo.schoolProperty }" disabled>
+							<input type="text" class="form-control" name="schoolProperty"
+								id="schoolProperty" value="${schoolInfo.schoolProperty }"
+								disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="schoolType" class="col-sm-2 control-label">类型</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="schoolType" id="schoolType"
-								value="${schoolInfo.schoolType }" disabled>
+							<input type="text" class="form-control" name="schoolType"
+								id="schoolType" value="${schoolInfo.schoolType }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="schoolCharacter" class="col-sm-2 control-label">性质</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="schoolCharacter" id="schoolCharacter"
-								value="${schoolInfo.schoolCharacter }" disabled>
+							<input type="text" class="form-control" name="schoolCharacter"
+								id="schoolCharacter" value="${schoolInfo.schoolCharacter }"
+								disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="schoolRank" class="col-sm-2 control-label">排名</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="schoolRank" id="schoolRank"
-								value="${schoolInfo.schoolRank }" disabled>
+							<input type="text" class="form-control" name="schoolRank"
+								id="schoolRank" value="${schoolInfo.schoolRank }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="schoolTel" class="col-sm-2 control-label">联系电话</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" name="schoolTel" id="schoolTel"
-								value="${schoolInfo.schoolTel }" disabled>
+							<input type="text" class="form-control" name="schoolTel"
+								id="schoolTel" value="${schoolInfo.schoolTel }" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="schoolIntroduction" class="col-sm-2 control-label">学校介绍</label>
 						<div class="col-sm-5">
-							<textarea class="form-control" rows="5"
-							name="schoolIntroduction" id="schoolIntroduction" disabled>${schoolInfo.schoolIntroduction}</textarea>
+							<textarea class="form-control" rows="5" name="schoolIntroduction"
+								id="schoolIntroduction" disabled>${schoolInfo.schoolIntroduction}</textarea>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 		<hr>
-		
+
 		<table class="table table-hover">
 			<tr>
 				<th>专业名称</th>
@@ -150,31 +154,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${item.enrollmentNo }</td>
 						<td>${item.participantNo }</td>
 						<td>${item.offerNo }</td>
-						<td>
-							<a data-toggle="modal" href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }" data-target="#passingScoreModal" class="btn btn-primary" role="button">分数线</a>
-							<a href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }" class="btn btn-success" role="button">详情</a>
-							<c:if test="${item.collect == false}">
-								<button type="button" class="btn btn-warning" onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
-							</c:if>
-							<c:if test="${item.collect == true}">
-								<button type="button" class="btn btn-default" >已收藏</button>
-							</c:if>
-						</td>
+						<td><a data-toggle="modal"
+							href="<%=basePath %>majorSearch/queryPassingScore.do?majorDetailId=${item.majorDetailId }"
+							data-target="#passingScoreModal" class="btn btn-primary"
+							role="button">分数线</a> <a
+							href="<%=basePath %>majorDetail/toMajorDetailView.do?majorDetailId=${item.majorDetailId }"
+							class="btn btn-success" role="button">详情</a> <c:if
+								test="${item.collect == false}">
+								<button type="button" class="btn btn-warning"
+									onclick="javascript:collectMajorDetail(${item.majorDetailId })">收藏</button>
+							</c:if> <c:if test="${item.collect == true}">
+								<button type="button" class="btn btn-default">已收藏</button>
+							</c:if> <c:if test="${isManager == 1 }">
+								<a
+									href="<%=basePath %>admin/toUpdateMajorDetail.do?majorDetailId=${item.majorDetailId }"
+									class="btn btn-info" role="button">管理员编辑</a>
+							</c:if></td>
 					</tr>
-				
+
 				</c:forEach>
-			
+
 			</c:if>
-			
+
 		</table>
 	</div>
-	
-<div class="modal fade" id="passingScoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    </div>
-  </div>
-</div>
+
+	<div class="modal fade" id="passingScoreModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content"></div>
+		</div>
+	</div>
 
 
 </body>

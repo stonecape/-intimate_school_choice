@@ -92,6 +92,12 @@ public class MajorSearchController extends BaseController {
 					}
 				}
 			}
+			
+			if(this.getSessionUser(req).getIsManager() == (byte)1) {
+				result.put("isManager", 1);
+			} else {
+				result.put("isManager", 0);
+			}
 		}
 		result.put("detailVoList", detailVoList);
 		

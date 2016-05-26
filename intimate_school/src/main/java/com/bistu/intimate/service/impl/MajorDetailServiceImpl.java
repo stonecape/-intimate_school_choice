@@ -82,14 +82,20 @@ public class MajorDetailServiceImpl implements MajorDetailService {
 	}
 	
 	public Result<Boolean> updateMajorDetail(MajorDetialAddBean updateBean, Integer majorDetailId) {
-		logger.info("=====添加新的专业信息=====");
+		logger.info("=====更新专业数据=====");
 		Result<Boolean> result = new Result<Boolean>();
 		logger.info(
 				"updateBean->" + ToStringBuilder.reflectionToString(updateBean) + "|majorDetailId->" + majorDetailId);
 		try {
 			// 1. 拼装专业详情并更新数据库
 			MajorDetail majorDetail = new MajorDetail();
-			BeanUtils.copyProperties(updateBean, majorDetail);
+			majorDetail.setEnrollmentNo(updateBean.getEnrollmentNo());
+			majorDetail.setParticipantNo(updateBean.getParticipantNo());
+			majorDetail.setOfferNo(updateBean.getOfferNo());
+			majorDetail.setLesson1Name(updateBean.getLesson1Name());
+			majorDetail.setLesson2Name(updateBean.getLesson2Name());
+			majorDetail.setLesson3Name(updateBean.getLesson3Name());
+			majorDetail.setLesson4Name(updateBean.getLesson4Name());
 			majorDetail.setMajorDetailId(majorDetailId);
 			majorDetail.setYn((byte) 1);
 			majorDetail.setCreateTime(new Date());

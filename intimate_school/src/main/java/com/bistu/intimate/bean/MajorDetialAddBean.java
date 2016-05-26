@@ -4,6 +4,7 @@ public class MajorDetialAddBean extends BaseBean{
 	
 	private static final long serialVersionUID = 5451643692083252420L;
 	
+	private int majorDetailId;
 	private int schoolId;
 	private int majorId;
 	private int enrollmentNo;
@@ -198,4 +199,11 @@ public class MajorDetialAddBean extends BaseBean{
 	public void setLesson4Name(String lesson4Name) {
 		this.lesson4Name = lesson4Name;
 	}
+	public int getMajorDetailId() {
+		return majorDetailId;
+	}
+	public void setMajorDetailId(int majorDetailId) {
+		this.majorDetailId = majorDetailId;
+	}
+	
 }
